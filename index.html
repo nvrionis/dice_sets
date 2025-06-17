@@ -1,0 +1,203 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dice Subset Roller</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="app">
+    <h1>Dice Subset Roller</h1>
+
+    <!-- 1. Player Setup -->
+    <section id="player-setup">
+      <h2>1. Players</h2>
+      <div class="player-config">
+        <input type="number" id="player-count" min="1" max="6" placeholder="# of players"/>
+        <button id="setup-players">Setup</button>
+      </div>
+      <div id="players" class="player-inputs"></div>
+    </section>
+
+    <!-- 2. Pool & Limits Configuration -->
+    <section id="config-section" class="hidden">
+      <h2>2. Pool &amp; Limits</h2>
+      <label>
+        <input type="checkbox" id="individual-toggle"/> Use Individual Pools
+      </label>
+
+      <!-- Common Pool -->
+      <div id="common-config" class="config-form">
+        <h3>Common Pool Limits</h3>
+        <!-- All 10 subsets -->
+        <div class="subset-row" data-subset="double">
+          <span>Double:</span>
+          <input type="number" min="0" class="limit-input" data-subset="double" placeholder="0"/>
+          <label><input type="checkbox" class="infinite-checkbox" data-subset="double"/> ∞</label>
+        </div>
+        <div class="subset-row" data-subset="highLow">
+          <span>High/Low:</span>
+          <input type="number" min="0" class="limit-input" data-subset="highLow" placeholder="0"/>
+          <label><input type="checkbox" class="infinite-checkbox" data-subset="highLow"/> ∞</label>
+        </div>
+        <div class="subset-row" data-subset="high">
+          <span>High:</span>
+          <input type="number" min="0" class="limit-input" data-subset="high" placeholder="0"/>
+          <label><input type="checkbox" class="infinite-checkbox" data-subset="high"/> ∞</label>
+        </div>
+        <div class="subset-row" data-subset="low">
+          <span>Low:</span>
+          <input type="number" min="0" class="limit-input" data-subset="low" placeholder="0"/>
+          <label><input type="checkbox" class="infinite-checkbox" data-subset="low"/> ∞</label>
+        </div>
+        <div class="subset-row" data-subset="mid">
+          <span>Mid:</span>
+          <input type="number" min="0" class="limit-input" data-subset="mid" placeholder="0"/>
+          <label><input type="checkbox" class="infinite-checkbox" data-subset="mid"/> ∞</label>
+        </div>
+        <div class="subset-row" data-subset="opposite">
+          <span>Opposite:</span>
+          <input type="number" min="0" class="limit-input" data-subset="opposite" placeholder="0"/>
+          <label><input type="checkbox" class="infinite-checkbox" data-subset="opposite"/> ∞</label>
+        </div>
+        <div class="subset-row" data-subset="odds">
+          <span>Odds:</span>
+          <input type="number" min="0" class="limit-input" data-subset="odds" placeholder="0"/>
+          <label><input type="checkbox" class="infinite-checkbox" data-subset="odds"/> ∞</label>
+        </div>
+        <div class="subset-row" data-subset="evens">
+          <span>Evens:</span>
+          <input type="number" min="0" class="limit-input" data-subset="evens" placeholder="0"/>
+          <label><input type="checkbox" class="infinite-checkbox" data-subset="evens"/> ∞</label>
+        </div>
+        <div class="subset-row" data-subset="sequential">
+          <span>Sequential:</span>
+          <input type="number" min="0" class="limit-input" data-subset="sequential" placeholder="0"/>
+          <label><input type="checkbox" class="infinite-checkbox" data-subset="sequential"/> ∞</label>
+        </div>
+        <div class="subset-row" data-subset="gap">
+          <span>Gap:</span>
+          <input type="number" min="0" class="limit-input" data-subset="gap" placeholder="0"/>
+          <label><input type="checkbox" class="infinite-checkbox" data-subset="gap"/> ∞</label>
+        </div>
+      </div>
+
+      <!-- Individual Pools -->
+      <div id="individual-config" class="hidden">
+        <h3>Individual Pool Options</h3>
+        <label><input type="radio" name="ind-mode" value="same" checked/> Same Resources</label>
+        <label><input type="radio" name="ind-mode" value="custom"/> Custom per Player</label>
+
+        <!-- Master Limits (Same Resources) -->
+        <div id="master-config" class="config-form">
+          <h4>Master Limits</h4>
+          <!-- repeat all 10 subset rows, using same classes/data-subset -->
+          <div class="subset-row" data-subset="double">
+            <span>Double:</span>
+            <input type="number" min="0" class="limit-input" data-subset="double" placeholder="0"/>
+            <label><input type="checkbox" class="infinite-checkbox" data-subset="double"/> ∞</label>
+          </div>
+          <div class="subset-row" data-subset="highLow">
+            <span>High/Low:</span>
+            <input type="number" min="0" class="limit-input" data-subset="highLow" placeholder="0"/>
+            <label><input type="checkbox" class="infinite-checkbox" data-subset="highLow"/> ∞</label>
+          </div>
+          <div class="subset-row" data-subset="high">
+            <span>High:</span>
+            <input type="number" min="0" class="limit-input" data-subset="high" placeholder="0"/>
+            <label><input type="checkbox" class="infinite-checkbox" data-subset="high"/> ∞</label>
+          </div>
+          <div class="subset-row" data-subset="low">
+            <span>Low:</span>
+            <input type="number" min="0" class="limit-input" data-subset="low" placeholder="0"/>
+            <label><input type="checkbox" class="infinite-checkbox" data-subset="low"/> ∞</label>
+          </div>
+          <div class="subset-row" data-subset="mid">
+            <span>Mid:</span>
+            <input type="number" min="0" class="limit-input" data-subset="mid" placeholder="0"/>
+            <label><input type="checkbox" class="infinite-checkbox" data-subset="mid"/> ∞</label>
+          </div>
+          <div class="subset-row" data-subset="opposite">
+            <span>Opposite:</span>
+            <input type="number" min="0" class="limit-input" data-subset="opposite" placeholder="0"/>
+            <label><input type="checkbox" class="infinite-checkbox" data-subset="opposite"/> ∞</label>
+          </div>
+          <div class="subset-row" data-subset="odds">
+            <span>Odds:</span>
+            <input type="number" min="0" class="limit-input" data-subset="odds" placeholder="0"/>
+            <label><input type="checkbox" class="infinite-checkbox" data-subset="odds"/> ∞</label>
+          </div>
+          <div class="subset-row" data-subset="evens">
+            <span>Evens:</span>
+            <input type="number" min="0" class="limit-input" data-subset="evens" placeholder="0"/>
+            <label><input type="checkbox" class="infinite-checkbox" data-subset="evens"/> ∞</label>
+          </div>
+          <div class="subset-row" data-subset="sequential">
+            <span>Sequential:</span>
+            <input type="number" min="0" class="limit-input" data-subset="sequential" placeholder="0"/>
+            <label><input type="checkbox" class="infinite-checkbox" data-subset="sequential"/> ∞</label>
+          </div>
+          <div class="subset-row" data-subset="gap">
+            <span>Gap:</span>
+            <input type="number" min="0" class="limit-input" data-subset="gap" placeholder="0"/>
+            <label><input type="checkbox" class="infinite-checkbox" data-subset="gap"/> ∞</label>
+          </div>
+        </div>
+
+        <!-- Custom per-player (generated) -->
+        <div id="per-player-config" class="hidden"></div>
+      </div>
+
+      <button id="start-game">Start Game</button>
+    </section>
+
+    <!-- 3. Roll Section -->
+    <section id="roll-section" class="hidden">
+      <h2>3. Roll Dice</h2>
+      <div class="controls">
+        <label>Player:
+          <select id="player-select"></select>
+        </label>
+        <label>Subset:
+          <select id="subset-select"></select>
+        </label>
+        <span id="remaining-display"></span>
+        <button id="roll-dice">Roll</button>
+      </div>
+
+      <div class="results">
+        <div id="dice-output" class="dice-output"></div>
+        <div id="subset-output" class="subset-output"></div>
+        <div class="results">
+        <div class="dice-scene">
+            <div class="dice" id="dice1">
+            <div class="face face1">1</div>
+            <div class="face face2">2</div>
+            <div class="face face3">3</div>
+            <div class="face face4">4</div>
+            <div class="face face5">5</div>
+            <div class="face face6">6</div>
+            </div>
+            <div class="dice" id="dice2">
+            <div class="face face1">1</div>
+            <div class="face face2">2</div>
+            <div class="face face3">3</div>
+            <div class="face face4">4</div>
+            <div class="face face5">5</div>
+            <div class="face face6">6</div>
+            </div>
+        </div>
+        <div id="subset-output" class="subset-output"></div>
+        </div>
+
+      </div>
+
+      <h3>History</h3>
+      <ul id="history" class="history"></ul>
+    </section>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
