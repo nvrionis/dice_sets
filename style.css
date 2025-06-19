@@ -159,12 +159,14 @@ section:hover {
   background: var(--border);
 }
 
+
 .limit-input,
 .plimit-input {
-  flex: 1 1 auto;
-  max-width: 3rem;
+  flex: 0 0 auto;
+  width: 3rem;
   margin: 0 0.5rem;
 }
+
 .disable-checkbox,
 .pdisable-checkbox {
   margin-left: auto;
@@ -226,9 +228,6 @@ button {
   font-size: 1rem;
   font-weight: 500;
   transition: background 0.2s ease, transform 0.1s ease;
-}
-button:hover {
-  background: #0288d1;
 }
 button:active {
   transform: scale(0.97);
@@ -363,3 +362,94 @@ button:active {
   pointer-events: none;
 }
 
+/*=====================================
+   MOBILE ENHANCEMENTS (<480px wide)
+=====================================*/
+@media (max-width: 480px) {
+  /* 1) Scale down the base font size */
+  html {
+    font-size: 14px;
+  }
+
+  /* 2) Tighter section padding */
+  section {
+    padding: 12px 16px;
+  }
+
+  /* 3) Slimmer headings */
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.1rem; }
+  h4 { font-size: 1rem; }
+
+  /* 4) Form-row and control gaps */
+  .form-row,
+  .controls {
+    gap: 0.5rem;
+  }
+
+  /* 5) Inputs, selects, buttons */
+  input[type="text"],
+  input[type="number"],
+  select,
+  button {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+
+  /* 6) Dice size */
+  .dice {
+    width: 60px;
+    height: 60px;
+  }
+  .dice .face {
+    width: 60px;
+    height: 60px;
+    font-size: 1.4rem;
+  }
+
+  /* 7) Subset-rows: one-column, stacked */
+  .subset-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .subset-row span {
+    flex: none;
+    margin: 0;
+  }
+  .limit-input,
+  .plimit-input {
+    flex: 0 0 auto;
+    width: 3rem; 
+    margin: 0;
+  }
+
+
+  /* 8) History list smaller text */
+  .history li {
+    font-size: 0.85rem;
+    padding: 6px 8px;
+  }
+}
+
+/*=====================================
+   SUPER-NARROW CONTROLS (<360px wide)
+=====================================*/
+@media (max-width: 360px) {
+  /* Stack roll controls vertically */
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .controls > * {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Force browsers to draw the native up/down arrows again */
+input[type="number"] {
+  appearance: auto;
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
+}
